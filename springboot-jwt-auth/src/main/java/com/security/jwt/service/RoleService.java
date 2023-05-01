@@ -10,4 +10,8 @@ public interface RoleService {
 
     RoleDto createRole(RoleDto role);
 
+    void updateRole(Integer id, RoleDto role);
+
+    void deleteRole(Integer id);
+
 }
