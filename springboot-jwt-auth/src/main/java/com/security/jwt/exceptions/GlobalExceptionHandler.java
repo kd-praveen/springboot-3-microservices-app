@@ -20,4 +20,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(UserRoleNotFoundException.class)
+    public ResponseEntity<ErrorObject> handleUserRoleNotFoundException(UserRoleNotFoundException ex, WebRequest request){
+        ErrorObject errorObject = new ErrorObject();
+
+        errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
+        errorObject.setMessage(ex.getMessage());
+
+        return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.NOT_FOUND);
+    }
+
 }

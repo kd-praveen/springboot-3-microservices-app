@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.security.jwt.dto.RoleDto;
+import com.security.jwt.exceptions.UserRoleNotFoundException;
 import com.security.jwt.models.Role;
 import com.security.jwt.repository.RoleRepository;
 import com.security.jwt.service.RoleService;
@@ -43,6 +44,25 @@ public class RoleImpl implements RoleService{
                 .builder()
                 .name(role.getName())
                 .build();
+    }
+
+    @Override
+    public void updateRole(Integer id, RoleDto roleRequest) {
+
+        Role role = roleRepository.findById(id)
+                .orElseThrow(() -> new UserRoleNotFoundException("User role does not exist."));
+
+        role.setName(roleRequest.getName());
+
+        roleRepository.save(role);
+    }
+
+    @Override
+    public void deleteRole(Integer id) {
+        Role role = roleRepository.findById(id)
+                .orElseThrow(() -> new UserRoleNotFoundException("User role does not exist."));
+
+        roleRepository.delete(role);
     }
     
 }
