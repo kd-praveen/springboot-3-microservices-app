@@ -1,11 +1,12 @@
 package com.praveen.eventsservice.service.implementations;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.praveen.eventsservice.dto.EventRequestDto;
+import com.praveen.eventsservice.dto.EventDto;
 import com.praveen.eventsservice.dto.EventSuccessResponseDto;
 import com.praveen.eventsservice.models.Event;
 import com.praveen.eventsservice.repository.EventRepository;
@@ -18,7 +19,7 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
 
     @Override
-    public EventSuccessResponseDto createEvent(EventRequestDto eventRequestDto) {
+    public EventSuccessResponseDto createEvent(EventDto eventRequestDto) {
         var event = Event.builder()
                 .eventName(eventRequestDto.getEventName())
                 .eventDescription(eventRequestDto.getEventDescription())
@@ -37,8 +38,27 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEvents() {
-        return eventRepository.findAll();
+    public List<EventDto> getEvents() {
+        return eventRepository.findAll().stream().map(p -> mapToEventDto(p)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EventDto> getUserEvents(Integer userId) {
+        List<Event> events = eventRepository.findByUserId(userId);
+
+        return events.stream().map(p -> mapToEventDto(p)).collect(Collectors.toList());
+    }
+
+    private EventDto mapToEventDto(Event event){
+        EventDto eventDto = new EventDto();
+        eventDto.setEventName(event.getEventName());
+        eventDto.setEventDescription(event.getEventDescription());
+        eventDto.setEventDate(event.getEventDate());
+        eventDto.setEventLocation(event.getEventLocation());
+        eventDto.setEventTime(event.getEventTime());
+        eventDto.setUserId(event.getUserId());
+
+        return eventDto;
     }
     
 }

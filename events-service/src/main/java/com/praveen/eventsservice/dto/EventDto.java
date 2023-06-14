@@ -1,12 +1,16 @@
 package com.praveen.eventsservice.dto;
 
-import java.sql.Date;
 import java.time.LocalTime;
+import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class EventRequestDto {
+@AllArgsConstructor
+@NoArgsConstructor
+public class EventDto {
     
     private String eventName;
 

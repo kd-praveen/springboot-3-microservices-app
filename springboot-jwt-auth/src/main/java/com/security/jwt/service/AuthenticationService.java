@@ -2,14 +2,14 @@ package com.security.jwt.service;
 
 import com.security.jwt.dto.AuthenticationRequestDto;
 import com.security.jwt.dto.AuthenticationResponseDto;
-import com.security.jwt.dto.RegisterRequestDto;
-import com.security.jwt.dto.RegisterResponseDto;
+import com.security.jwt.dto.UserRegisterRequestDto;
+import com.security.jwt.dto.UserRegisterResponseDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface AuthenticationService {
 
-    RegisterResponseDto register(RegisterRequestDto request);
+    UserRegisterResponseDto register(UserRegisterRequestDto request);
     
     AuthenticationResponseDto authenticate(AuthenticationRequestDto request);
 

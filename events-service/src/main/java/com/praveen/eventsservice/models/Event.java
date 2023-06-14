@@ -3,6 +3,8 @@ package com.praveen.eventsservice.models;
 import java.time.LocalTime;
 import java.util.Date;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@DynamicUpdate
 @Data
 @Builder
 @AllArgsConstructor
@@ -26,7 +29,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "event_name")
+    @Column(name = "event_name", unique = true)
     private String eventName;
 
     @Column(name = "event_date")

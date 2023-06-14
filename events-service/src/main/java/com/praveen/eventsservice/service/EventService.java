@@ -2,13 +2,14 @@ package com.praveen.eventsservice.service;
 
 import java.util.List;
 
-import com.praveen.eventsservice.dto.EventRequestDto;
+import com.praveen.eventsservice.dto.EventDto;
 import com.praveen.eventsservice.dto.EventSuccessResponseDto;
-import com.praveen.eventsservice.models.Event;
 
 public interface EventService {
     
-    EventSuccessResponseDto createEvent(EventRequestDto eventRequestDto);
+    EventSuccessResponseDto createEvent(EventDto eventRequestDto);
 
-    List<Event> getEvents();
+    List<EventDto> getEvents();
+
+    List<EventDto> getUserEvents(Integer userId);
 }
