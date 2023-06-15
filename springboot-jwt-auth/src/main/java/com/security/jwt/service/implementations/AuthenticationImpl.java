@@ -15,8 +15,8 @@ import com.security.jwt.config.CustomUserDetails;
 import com.security.jwt.config.JwtService;
 import com.security.jwt.dto.AuthenticationRequestDto;
 import com.security.jwt.dto.AuthenticationResponseDto;
-import com.security.jwt.dto.RegisterRequestDto;
-import com.security.jwt.dto.RegisterResponseDto;
+import com.security.jwt.dto.UserRegisterRequestDto;
+import com.security.jwt.dto.UserRegisterResponseDto;
 import com.security.jwt.exceptions.JwtTokenExpiredException;
 import com.security.jwt.models.User;
 import com.security.jwt.models.Role;
@@ -44,7 +44,7 @@ public class AuthenticationImpl implements AuthenticationService{
     private final UserDetailsService userDetailsService;
 
     @Override
-    public RegisterResponseDto register(RegisterRequestDto request) {
+    public UserRegisterResponseDto register(UserRegisterRequestDto request) {
 
         Role roles = roleRepository.findByName(request.getRole()).get();
 
@@ -57,8 +57,9 @@ public class AuthenticationImpl implements AuthenticationService{
                 .build();
         repository.save(user);
 
-        return RegisterResponseDto
+        return UserRegisterResponseDto
                 .builder()
+                .id(user.getId())
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
                 .email(user.getEmail())

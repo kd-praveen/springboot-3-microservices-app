@@ -19,7 +19,7 @@ public class AuthEntryPoint implements AuthenticationEntryPoint{
                 
                 response.setContentType("application/json");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                String json = "{ \"statusCode\" : "+ HttpServletResponse.SC_UNAUTHORIZED +", \"mesasage\" : \""+ authException.getMessage() +"\", }";
+                String json = "{ \"statusCode\" : "+ HttpServletResponse.SC_UNAUTHORIZED +", \"message\" : \""+ authException.getMessage() +"\", }";
                 response.getOutputStream().println(json);
         
     }

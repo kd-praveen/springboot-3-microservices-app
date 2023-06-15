@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.security.jwt.dto.AuthenticationRequestDto;
 import com.security.jwt.dto.AuthenticationResponseDto;
 import com.security.jwt.dto.JsonResponseDto;
-import com.security.jwt.dto.RegisterRequestDto;
+import com.security.jwt.dto.UserRegisterRequestDto;
 import com.security.jwt.repository.UserRepository;
 import com.security.jwt.service.AuthenticationService;
 
@@ -30,7 +30,7 @@ public class AuthenticationController {
     @PostMapping("register")
     @ResponseBody
     public ResponseEntity<JsonResponseDto> register(
-            @RequestBody RegisterRequestDto requestDto
+            @RequestBody UserRegisterRequestDto requestDto
     ) {
         if(repository.existsByEmail(requestDto.getEmail())){
             JsonResponseDto errorResponse = new JsonResponseDto();
